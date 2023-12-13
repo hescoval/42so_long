@@ -6,7 +6,7 @@
 /*   By: hescoval <hescoval@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 16:07:16 by hescoval          #+#    #+#             */
-/*   Updated: 2023/12/12 18:34:40 by hescoval         ###   ########.fr       */
+/*   Updated: 2023/12/13 10:36:20 by hescoval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ char	**parse_input(char *file, int *height)
 	close(fd);
 	return (lines);
 }
+
 int	check_ents(char **input, int height, int length)
 {
 	static int	i;
@@ -69,11 +70,13 @@ int	check_ents(char **input, int height, int length)
 		if(!check_walls(input[i], length) || custom_len(input[i]) != length)
 			return(p_error("Line"));
 		count_entities(input[i], &exits, &starts, &collectibles);
+		if(!check_string(input[i]))
+			return(p_error("Unknown"));
 		i++;
 	}
 	if(exits != 1 || starts != 1 || collectibles < 1)
 		return (p_error("Entities"));
-	printf("Found %i Coins, %i starts and %i exits", collectibles, starts, exits);
+	ft_printf("Found %i Coin(s), %i start(s) and %i exit(s)\n", collectibles, starts, exits);
 	return (1);
 }
 
@@ -82,18 +85,20 @@ int valid_map(char *file)
 	char	**input;
 	int		height;
 	int		length;
+	int		bad;
 
+	bad = 0;
 	input = parse_input(file, &height);
 	if(!input)
 		return(p_error("File"));
 	length = custom_len(input[0]);
 
 	if (!check_ents(input, height, length))
-	{
-		free_split(input);
-		return 0;
-	}
-	
+		bad = 1;
+	if (!valid_path(input, height))
+		bad = 1;
 	free_split(input);
-	return 1;
+	if(bad)
+		return (0);
+	return (1);
 }

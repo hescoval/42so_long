@@ -6,7 +6,7 @@
 /*   By: hescoval <hescoval@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:42:50 by nishi             #+#    #+#             */
-/*   Updated: 2023/12/12 16:06:10 by hescoval         ###   ########.fr       */
+/*   Updated: 2023/12/13 09:09:39 by hescoval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,9 @@
 int main(int ac, char **av)
 {
 	if (ac != 2)
-	{
-		ft_printf("Error\no input file, or too many arguments");
-		return 0;
-	}
+		return(p_error("Input"));
 	if	(!check_format(av[1]))
-		return 0;
+		return (0);
 	if	(!valid_map(av[1]))
-		return 0;
+		return (0);
 }
