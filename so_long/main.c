@@ -29,6 +29,7 @@ int main(int ac, char **av)
 		return (1);
 
 	win_ptr = mlx_new_window(mlx_ptr, 1920, 1080, "new window");
+	mlx_destroy_window(mlx_ptr, win_ptr);
 	mlx_destroy_display(mlx_ptr);
 	free(mlx_ptr);
 	return 0;
