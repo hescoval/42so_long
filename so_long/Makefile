@@ -1,21 +1,28 @@
 NAME = so_long
-CC = cc -g -Wall -Wextra -Werror 
+CC = cc -g -Wall -Wextra -Werror
 RM = rm -rf
 LIBFT = libft/libft.a
 LIBFT_DIR = libft/
+MLX_DIR = ./mlx
+MLX_FLAGS = -Lmlx -lmlx -L/usr/lib/X11 -lXext -lX11
+MLX_LIB = $(MLX_DIR)/libmlx_Linux.a
 SRCS = *.c
 OBJS = $(SRCS:.c=.o)
+INCLUDES = -I/usr/include -Imlx
 
-all: $(NAME)
+all:  $(MLX_LIB) $(NAME)
 
 $(NAME): $(LIBFT) $(OBJS)
-	cc -o $(NAME) $(OBJS) $(LIBFT) 
+	$(CC) -o $(NAME) $(OBJS) $(LIBFT) $(MLX_FLAGS)
+
+$(MLX_LIB):
+	@make -C $(MLX_DIR)
 
 $(LIBFT):
-	$(MAKE) -C $(LIBFT_DIR) 
+	$(MAKE) -C $(LIBFT_DIR)
 
 $(OBJS): $(SRCS)
-	$(CC) -c $(SRCS)
+	$(CC) -c $(SRCS) $(INCLUDES)
 
 clean:
 	$(RM) $(OBJS)
@@ -25,5 +32,5 @@ fclean: clean
 	$(RM) $(NAME)
 	$(MAKE) fclean -C $(LIBFT_DIR)
 
-re: fclean	
+re: fclean
 	$(MAKE)
