@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hescoval <hescoval@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/12 14:42:50 by nishi             #+#    #+#             */
-/*   Updated: 2024/01/12 09:28:04 by hescoval         ###   ########.fr       */
+/*   Created: 2024/01/12 08:03:49 by hescoval          #+#    #+#             */
+/*   Updated: 2024/01/12 08:32:03 by hescoval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "s_l.h"
 
-int main(int ac, char **av)
+int close_window(int mask, void *visuals)
 {
-	graphics *visuals;
-
-	visuals = (graphics *)malloc(sizeof(graphics));
-	if (ac != 2)
-		return(p_error("Input"));
-	if	(!check_format(av[1]))
-		return (0);
-	if	(!valid_map(av[1], visuals))
-		return (0);
-	
-	start_game(visuals);
+    (void)mask;
+    
+    graphics *real = (graphics *) visuals;
+    cleanup(real);
+    exit(1);
+    return(0);
 }

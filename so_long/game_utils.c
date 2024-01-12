@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   game_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hescoval <hescoval@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/12 14:42:50 by nishi             #+#    #+#             */
-/*   Updated: 2024/01/12 09:28:04 by hescoval         ###   ########.fr       */
+/*   Created: 2024/01/12 08:05:53 by hescoval          #+#    #+#             */
+/*   Updated: 2024/01/12 09:34:35 by hescoval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "s_l.h"
 
-int main(int ac, char **av)
+void    start_game(graphics *visuals)
 {
-	graphics *visuals;
-
-	visuals = (graphics *)malloc(sizeof(graphics));
-	if (ac != 2)
-		return(p_error("Input"));
-	if	(!check_format(av[1]))
-		return (0);
-	if	(!valid_map(av[1], visuals))
-		return (0);
-	
-	start_game(visuals);
+    visuals->mlx = mlx_init();
+	if (!visuals->mlx)
+        cleanup(visuals);
+	visuals->win = mlx_new_window(visuals->mlx, 640, 480, "new window");
+    if  (!visuals->win)
+        cleanup(visuals);
+    
+    mlx_hook(visuals->win, 17, (1L << 17), close_window, visuals); // why does this seg fault?
+    mlx_loop(visuals->mlx);
 }

@@ -6,7 +6,7 @@
 /*   By: hescoval <hescoval@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 09:21:35 by hescoval          #+#    #+#             */
-/*   Updated: 2023/12/13 10:32:24 by hescoval         ###   ########.fr       */
+/*   Updated: 2024/01/12 09:01:07 by hescoval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 #include <unistd.h>
 #include "libft/libft.h"
 #include "mlx/mlx.h"
+#include <X11/X.h>
+#include <X11/keysym.h>
 
 typedef struct coins
 {
@@ -32,10 +34,23 @@ typedef struct coords
 	int	y;
 }	coords;
 
+typedef struct graphics
+{
+	void	*mlx;
+	void	*win;
+	void	*img;
+	char	**map;
+	int		height;
+	int		length;
+	int		coins;
+	int		moves;
+}	graphics;
+
 int 	check_format(char *file);
-int		valid_map(char *file);
+int		valid_map(char *file, graphics *visuals);
 int		p_error(char *str);
 int		valid_path(char **input, int height);
+void	cleanup(graphics *visuals);
 
 //	Map Checker Utils
 
@@ -52,5 +67,10 @@ void	find_s_e(char **input, coords *start, coords *end);
 coins	*make_coin(int x, int y);
 coins	*find_coins(char **input, int len, int height);
 int		check_coins(char **input, coins *head);
+
+//	Graphical Stuff
+
+void    start_game(graphics *visuals);
+int		close_window(int mask, void *visuals);
 
 #endif

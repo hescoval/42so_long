@@ -6,11 +6,27 @@
 /*   By: hescoval <hescoval@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:09:24 by hescoval          #+#    #+#             */
-/*   Updated: 2023/12/13 10:00:28 by hescoval         ###   ########.fr       */
+/*   Updated: 2024/01/12 09:26:26 by hescoval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "s_l.h"
+
+void cleanup(graphics *visuals)
+{
+	if(!visuals)
+		exit(1);
+	if(visuals->win)
+		mlx_destroy_window(visuals->mlx, visuals->win);
+	if(visuals->mlx)
+	{
+		mlx_destroy_display(visuals->mlx);
+		free(visuals->mlx);
+	}
+	free_split(visuals->map);
+	free(visuals);
+	exit(1);
+}
 
 int	p_error(char *str)
 {

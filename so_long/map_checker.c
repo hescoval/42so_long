@@ -6,7 +6,7 @@
 /*   By: hescoval <hescoval@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 16:07:16 by hescoval          #+#    #+#             */
-/*   Updated: 2023/12/13 10:36:20 by hescoval         ###   ########.fr       */
+/*   Updated: 2024/01/12 09:20:35 by hescoval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ size_t	count_lines(char *file)
 	return (line_count);
 }
 
-char	**parse_input(char *file, int *height)
+char	**parse_input(char *file, int height)
 {
 	int		fd;
 	char	**lines;
@@ -38,8 +38,7 @@ char	**parse_input(char *file, int *height)
 	int		i;
 
 	i = 0;
-	*height = count_lines(file);
-	lines = malloc(sizeof(char *) * (*height + 1));
+	lines = malloc(sizeof(char *) * (height + 1));
 	fd = open(file, O_RDONLY);
 	if(fd == -1)
 	{
@@ -54,20 +53,20 @@ char	**parse_input(char *file, int *height)
 	return (lines);
 }
 
-int	check_ents(char **input, int height, int length)
+int	check_ents(char **input, graphics *visuals)
 {
 	static int	i;
  	static int	exits;
 	static int	starts;
 	static int	collectibles;
 
-	if (length == height)
+	if (visuals->length == visuals->height)
 		return(p_error("Rectangle"));
-	if (!all_ones(input[0]) || !all_ones(input[height - 1]))
+	if (!all_ones(input[0]) || !all_ones(input[visuals->height - 1]))
 		return(p_error("Wall"));
 	while (input[i])
 	{
-		if(!check_walls(input[i], length) || custom_len(input[i]) != length)
+		if(!check_walls(input[i], visuals->length) || custom_len(input[i]) != visuals->length)
 			return(p_error("Line"));
 		count_entities(input[i], &exits, &starts, &collectibles);
 		if(!check_string(input[i]))
@@ -77,27 +76,25 @@ int	check_ents(char **input, int height, int length)
 	if(exits != 1 || starts != 1 || collectibles < 1)
 		return (p_error("Entities"));
 	ft_printf("Found %i Coin(s), %i start(s) and %i exit(s)\n", collectibles, starts, exits);
+	visuals->coins = collectibles;
 	return (1);
 }
 
-int valid_map(char *file)
+int valid_map(char *file, graphics *visuals)
 {
-	char	**input;
-	int		height;
-	int		length;
 	int		bad;
 
 	bad = 0;
-	input = parse_input(file, &height);
-	if(!input)
+	visuals->height = count_lines(file);
+	visuals->map = parse_input(file, visuals->height);
+	if(!visuals->map)
 		return(p_error("File"));
-	length = custom_len(input[0]);
+	visuals->length = custom_len(visuals->map[0]);
 
-	if (!check_ents(input, height, length))
+	if (!check_ents(visuals->map, visuals))
 		bad = 1;
-	if (!valid_path(input, height))
+	if (!valid_path(visuals->map, visuals->height))
 		bad = 1;
-	free_split(input);
 	if(bad)
 		return (0);
 	return (1);
