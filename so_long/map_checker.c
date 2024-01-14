@@ -6,7 +6,7 @@
 /*   By: hescoval <hescoval@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 16:07:16 by hescoval          #+#    #+#             */
-/*   Updated: 2024/01/12 09:20:35 by hescoval         ###   ########.fr       */
+/*   Updated: 2024/01/14 06:21:31 by hescoval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,14 @@ int	check_ents(char **input, graphics *visuals)
 		return(p_error("Wall"));
 	while (input[i])
 	{
-		if(!check_walls(input[i], visuals->length) || custom_len(input[i]) != visuals->length)
+		if (!check_walls(input[i], visuals->length) || custom_len(input[i]) != visuals->length)
 			return(p_error("Line"));
 		count_entities(input[i], &exits, &starts, &collectibles);
-		if(!check_string(input[i]))
+		if (!check_string(input[i]))
 			return(p_error("Unknown"));
 		i++;
 	}
-	if(exits != 1 || starts != 1 || collectibles < 1)
+	if (exits != 1 || starts != 1 || collectibles < 1)
 		return (p_error("Entities"));
 	ft_printf("Found %i Coin(s), %i start(s) and %i exit(s)\n", collectibles, starts, exits);
 	visuals->coins = collectibles;
@@ -93,7 +93,10 @@ int valid_map(char *file, graphics *visuals)
 
 	if (!check_ents(visuals->map, visuals))
 		bad = 1;
-	if (!valid_path(visuals->map, visuals->height))
+	printf("height: %i, length: %i\n", visuals->height, visuals->length);
+	if(visuals->height > MAX_HEIGHT || visuals->length > MAX_LENGTH)
+		return(p_error("Map"));
+	if (!valid_path(visuals))
 		bad = 1;
 	if(bad)
 		return (0);

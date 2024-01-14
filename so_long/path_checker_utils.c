@@ -6,18 +6,18 @@
 /*   By: hescoval <hescoval@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 09:57:10 by hescoval          #+#    #+#             */
-/*   Updated: 2023/12/13 10:41:13 by hescoval         ###   ########.fr       */
+/*   Updated: 2024/01/14 06:29:32 by hescoval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "s_l.h"
 
-char	**make_copy(char **src, int	arrays)
+char	**make_copy(char **src, int	height)
 {
 	int	i;
 	char	**copy;
 	
-	copy = malloc(sizeof(char *) * (arrays + 1));
+	copy = malloc(sizeof(char *) * (height + 1));
 	i = 0;
 	while (src[i])
 	{
@@ -57,7 +57,7 @@ coins	*find_coins(char **input, int len, int height)
 	return (head);
 }
 
-void	find_s_e(char **input, coords *start, coords *end)
+void	find_s_e(char **input, graphics *visuals)
 {
 	int	i;
 	int	j;
@@ -70,13 +70,13 @@ void	find_s_e(char **input, coords *start, coords *end)
 		{
 			if(input[i][j] == 'P')
 			{
-				start->x = j;
-				start->y = i;
+				visuals->p_loc[0] = j;
+				visuals->p_loc[1] = i;
 			}
 			if(input[i][j] == 'E')
 			{
-				end->x = j;
-				end->y = i;
+				visuals->e_loc[0] = j;
+				visuals->e_loc[1] = i;
 			}
 			j++;
 		}
