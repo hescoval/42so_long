@@ -6,7 +6,7 @@
 /*   By: hescoval <hescoval@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 05:40:28 by hescoval          #+#    #+#             */
-/*   Updated: 2024/01/15 08:59:07 by hescoval         ###   ########.fr       */
+/*   Updated: 2024/01/15 09:43:31 by hescoval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,11 @@ void    refresh_image(graphics *visuals, int x, int y)
     visuals->moves++;
     ft_printf("Moves: %i\n", visuals->moves);
     if(visuals->map[y][x] == 'C')
-    {
-        visuals->map[y][x] = '0';
         visuals->coins--;
+    if(visuals->map[y][x] == 'H')
+    {
+        ft_printf("You lost!\n");
+        cleanup(visuals);
     }
     if(visuals->map[y][x] == 'E')
     {
@@ -43,7 +45,7 @@ void    refresh_image(graphics *visuals, int x, int y)
     visuals->p_loc[1] = y;
     render_new_position(visuals);
     if(visuals->coins == 0)
-            open_end(visuals);
+        open_end(visuals);
 }
 
 void    load_images(graphics *visuals)
@@ -59,6 +61,8 @@ void    load_images(graphics *visuals)
     visuals->imgs[4] = mlx_xpm_file_to_image(visuals->mlx, "./images/open_door.xpm", &size, &size);
     visuals->imgs[5] = mlx_xpm_file_to_image(visuals->mlx, "./images/blank.xpm", &size, &size);
     visuals->imgs[6] = mlx_xpm_file_to_image(visuals->mlx, "./images/EP.xpm", &size, &size);
+    visuals->imgs[7] = mlx_xpm_file_to_image(visuals->mlx, "./images/cracked.xpm", &size, &size);
+    visuals->imgs[8] = mlx_xpm_file_to_image(visuals->mlx, "./images/hole.xpm", &size, &size);
 }
 
 void    render_stuff(graphics *visuals)
@@ -80,6 +84,8 @@ void    render_stuff(graphics *visuals)
                 mlx_put_image_to_window(visuals->mlx, visuals->win, visuals->imgs[2], j * 16, i * 16);
             if (visuals->map[i][j] == 'E')
                 mlx_put_image_to_window(visuals->mlx, visuals->win, visuals->imgs[3], j * 16, i * 16);
+            if (visuals->map[i][j] == '0')
+                mlx_put_image_to_window(visuals->mlx, visuals->win, visuals->imgs[7], j * 16, i * 16);
             j++;
         }
         i++;

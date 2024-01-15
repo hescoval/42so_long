@@ -6,7 +6,7 @@
 /*   By: hescoval <hescoval@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 09:21:35 by hescoval          #+#    #+#             */
-/*   Updated: 2024/01/15 08:58:47 by hescoval         ###   ########.fr       */
+/*   Updated: 2024/01/15 09:17:34 by hescoval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include "libft/libft.h"
-#include "mlx/mlx.h"
+#include "../libft/libft.h"
+#include "../mlx/mlx.h"
 #include <X11/X.h>
 #include <X11/keysym.h>
 
 #define MAX_LENGTH 100
 #define MAX_HEIGHT 67
-#define ENTITIES 7
+#define ENTITIES 9
 #define IMG_LENGTH 16
 #define IMG_HEIGHT 16
 
