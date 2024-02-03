@@ -6,7 +6,7 @@
 /*   By: hescoval <hescoval@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 11:47:13 by hescoval          #+#    #+#             */
-/*   Updated: 2023/12/12 16:40:27 by hescoval         ###   ########.fr       */
+/*   Updated: 2024/01/17 17:44:42 by hescoval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,20 +76,20 @@ void		ft_lstclear(t_list **lst, void (*del)(void *));
 void		ft_lstiter(t_list *lst, void (*f)(void *));
 t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 void		ft_lstadd_back(t_list **lst, t_list *new);
-int 		ft_max(int a, int b);
+int			ft_max(int a, int b);
 int			ft_abs(int num);
 int			ft_min(int a, int b);
 
-void	p_char(va_list args, int *printed);
-void	p_deci(va_list args, int *printed, char flag);
-void	p_hex(va_list args, int *printed, char flag);
-void	p_module(int *printed);
-void	p_str(va_list args, int *printed);
-int		ft_printf(const char *str, ...);
+void		p_char(va_list args, int *printed);
+void		p_deci(va_list args, int *printed, char flag);
+void		p_hex(va_list args, int *printed, char flag);
+void		p_module(int *printed);
+void		p_str(va_list args, int *printed);
+int			ft_printf(const char *str, ...);
 
-int		ft_strcontains(char *s, char c);
-char	*ft_strcpy_nl(char *dest, char *src, int nl_stop);
-char	*ft_strjoin_special(char *s1, char *s2);
-char	*get_next_line(int fd);
+int			ft_strcontains(char *s, char c);
+char		*ft_strcpy_nl(char *dest, char *src, int nl_stop);
+char		*ft_strjoin_special(char *s1, char *s2);
+char		*get_next_line(int fd);
 
 #endif

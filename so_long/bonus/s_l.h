@@ -6,39 +6,39 @@
 /*   By: hescoval <hescoval@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 09:21:35 by hescoval          #+#    #+#             */
-/*   Updated: 2024/01/15 09:17:34 by hescoval         ###   ########.fr       */
+/*   Updated: 2024/02/03 12:53:42 by hescoval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef S_L
-# define S_L
+#ifndef S_L_H
+# define S_L_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include "../libft/libft.h"
-#include "../mlx/mlx.h"
-#include <X11/X.h>
-#include <X11/keysym.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include "../libft/libft.h"
+# include "../mlx/mlx.h"
+# include <X11/X.h>
+# include <X11/keysym.h>
 
-#define MAX_LENGTH 100
-#define MAX_HEIGHT 67
-#define ENTITIES 9
-#define IMG_LENGTH 16
-#define IMG_HEIGHT 16
+# define MAX_LENGTH 60
+# define MAX_HEIGHT 33
+# define ENTITIES 8
+# define I_L 32
+# define I_H 32
 
 typedef struct coins
 {
-	int	x;
-	int	y;
-	struct coins *next;
-}	coins;
+	int				x;
+	int				y;
+	struct coins	*next;
+}	t_coins;
 
 typedef struct coords
 {
 	int	x;
 	int	y;
-}	coords;
+}	t_coords;
 
 typedef struct graphics
 {
@@ -52,7 +52,7 @@ typedef struct graphics
 	int		length;
 	int		coins;
 	int		moves;
-}	graphics;
+}	t_graphics;
 
 typedef enum KEYS
 {
@@ -65,15 +65,15 @@ typedef enum KEYS
 	RIGHT_KP = 65363,
 	DOWN_KP = 65364,
 	ESC = 65307
-}	KEYS;
+}	t_KEYS;
 
 typedef enum MASKS
 {
 	WINDOW_CLOSE = 1L << 17,
 	NO_MASK = 1L << 0
-}	MASKS;
+}	t_MASKS;
 
-int 	check_format(char *file);
+int		check_format(char *file);
 int		valid_map(char *file, graphics *visuals);
 int		p_error(char *str);
 int		valid_path(graphics *visuals);
@@ -89,7 +89,7 @@ int		check_string(char *str);
 
 //	Path Checker Utils
 
-char	**make_copy(char **src, int	arrays);
+char	**make_copy(char **src, int arrays);
 void	find_s_e(char **input, graphics *visuals);
 coins	*make_coin(int x, int y);
 coins	*find_coins(char **input, int len, int height);
@@ -97,13 +97,13 @@ int		check_coins(char **input, coins *head);
 
 //	Graphical Stuff
 
-void    start_game(graphics *visuals);
+void	start_game(graphics *visuals);
 int		close_window(graphics *visuals);
 int		key_press(int mask, graphics *visuals);
-void    render_stuff(graphics *visuals);
-void    load_images(graphics *visuals);
-void    refresh_image(graphics *visuals, int x, int y);
-void    render_new_position(graphics *visuals);
-void    render_old_position(graphics *visuals);
+void	render_stuff(graphics *visuals, int i);
+void	load_images(graphics *visuals);
+void	refresh_image(graphics *visuals, int x, int y);
+void	render_new_position(graphics *visuals);
+void	render_old_position(graphics *visuals);
 
 #endif

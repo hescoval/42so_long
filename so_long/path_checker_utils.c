@@ -6,17 +6,17 @@
 /*   By: hescoval <hescoval@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 09:57:10 by hescoval          #+#    #+#             */
-/*   Updated: 2024/01/14 06:29:32 by hescoval         ###   ########.fr       */
+/*   Updated: 2024/02/03 12:38:47 by hescoval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "s_l.h"
 
-char	**make_copy(char **src, int	height)
+char	**make_copy(char **src, int height)
 {
-	int	i;
+	int		i;
 	char	**copy;
-	
+
 	copy = malloc(sizeof(char *) * (height + 1));
 	i = 0;
 	while (src[i])
@@ -28,24 +28,24 @@ char	**make_copy(char **src, int	height)
 	return (copy);
 }
 
-coins	*find_coins(char **input, int len, int height)
+t_coins	*find_coins(char **input, int len, int height)
 {
 	static int	i;
 	int			j;
-	coins		*head;
-	coins		*tail;
-	coins		*new;
+	t_coins		*head;
+	t_coins		*tail;
+	t_coins		*new;
 
 	head = NULL;
-	while(i < height)
+	while (i < height)
 	{
 		j = -1;
-		while(++j < len)
+		while (++j < len)
 		{
-			if(input[i][j] == 'C')
+			if (input[i][j] == 'C')
 			{
 				new = make_coin(j, i);
-				if(head == NULL)
+				if (head == NULL)
 					head = new;
 				else
 					tail->next = new;
@@ -57,23 +57,23 @@ coins	*find_coins(char **input, int len, int height)
 	return (head);
 }
 
-void	find_s_e(char **input, graphics *visuals)
+void	find_s_e(char **input, t_graphics *visuals)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while(input[i])
+	while (input[i])
 	{
 		j = 0;
-		while(input[i][j])
+		while (input[i][j])
 		{
-			if(input[i][j] == 'P')
+			if (input[i][j] == 'P')
 			{
 				visuals->p_loc[0] = j;
 				visuals->p_loc[1] = i;
 			}
-			if(input[i][j] == 'E')
+			if (input[i][j] == 'E')
 			{
 				visuals->e_loc[0] = j;
 				visuals->e_loc[1] = i;
@@ -84,21 +84,21 @@ void	find_s_e(char **input, graphics *visuals)
 	}
 }
 
-coins	*make_coin(int x, int y)
+t_coins	*make_coin(int x, int y)
 {
-	coins	*ret;
+	t_coins	*ret;
 
-	ret = malloc(sizeof(coins));
+	ret = malloc(sizeof(t_coins));
 	ret->x = x;
 	ret->y = y;
 	ret->next = NULL;
 	return (ret);
 }
 
-int	check_coins(char **input, coins *head)
+int	check_coins(char **input, t_coins *head)
 {
 	int		bad;
-	coins	*helper;
+	t_coins	*helper;
 
 	bad = 0;
 	while (head)

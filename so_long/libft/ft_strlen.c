@@ -6,7 +6,7 @@
 /*   By: hescoval <hescoval@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 07:51:48 by hescoval          #+#    #+#             */
-/*   Updated: 2023/12/12 16:42:28 by hescoval         ###   ########.fr       */
+/*   Updated: 2024/01/17 17:44:14 by hescoval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,11 @@
 size_t	ft_strlen(const char *s)
 {
 	size_t	i;
-	
+
 	if (!s)
-		return 0;
+		return (0);
 	i = 0;
 	while (s[i])
-	{
 		i++;
-	}
 	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: hescoval <hescoval@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 09:21:24 by hescoval          #+#    #+#             */
-/*   Updated: 2023/12/13 09:21:25 by hescoval         ###   ########.fr       */
+/*   Updated: 2024/01/17 18:04:16 by hescoval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	get_last(char **str)
 	i = 0;
 	while (str[i])
 		i++;
-
 	return (i - 1);
 }
 
@@ -41,8 +40,8 @@ int	check_format(char *file)
 	{
 		ft_printf("Error\nFile is wrong format\n");
 		free_split(testing);
-		return 0;
+		return (0);
 	}
 	free_split(testing);
-	return 1;
+	return (1);
 }

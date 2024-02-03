@@ -6,7 +6,7 @@
 /*   By: hescoval <hescoval@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 17:07:39 by hescoval          #+#    #+#             */
-/*   Updated: 2023/12/13 09:13:01 by hescoval         ###   ########.fr       */
+/*   Updated: 2024/01/17 18:07:56 by hescoval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ int	custom_len(char *str)
 	int	i;
 
 	i = 0;
-	if(!str)
-		return 0;
+	if (!str)
+		return (0);
 	while (str[i] && str[i] != '\n')
 		i++;
-	return i;
+	return (i);
 }
 
 int	all_ones(char *str)
@@ -68,7 +68,7 @@ int	check_string(char *str)
 	char	*valid;
 	int		j;
 	int		found;
-	
+
 	valid = "PEC10\n";
 	i = 0;
 	while (str[i])
@@ -81,7 +81,7 @@ int	check_string(char *str)
 				found = 1;
 			j++;
 		}
-		if(!found)
+		if (!found)
 			return (0);
 		i++;
 	}

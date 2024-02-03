@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hescoval <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hescoval <hescoval@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 08:27:37 by hescoval          #+#    #+#             */
-/*   Updated: 2023/10/05 13:54:54 by hescoval         ###   ########.fr       */
+/*   Updated: 2024/02/03 12:01:58 by hescoval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 void	*ft_memmove(void *dest, const void *src, size_t n)
@@ -38,11 +39,3 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	}
 	return (dest);
 }
-
-/*
-	Very good function to learn, helps understand the memory part of programming
-	a tiny bit better, we were forced to not use a temporary array which the 
-	MAN indicates is a viable way to solve the overlap issue, so the mental exercise of
-	visualizing the memory being printed back to front and front to back
-	is very interesting.
-*/

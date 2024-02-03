@@ -6,7 +6,7 @@
 /*   By: hescoval <hescoval@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 18:09:24 by hescoval          #+#    #+#             */
-/*   Updated: 2024/01/14 03:02:35 by hescoval         ###   ########.fr       */
+/*   Updated: 2024/02/03 12:52:59 by hescoval         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,6 @@ int	p_error(char *str)
 	if (ft_strcmp(str, "Coins") == 0)
 		ft_printf("Error\nNo way to reach all coins\n");
 	if (ft_strcmp(str, "Map") == 0)
-		ft_printf("Error\nMap size Invalid, Needs to be at most 100 x 67\n");
+		ft_printf("Error\nMap size Invalid, Needs to be at most 60 x 33\n");
 	return (0);
 }
